@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.example.giaan.week4_oncalss_old.MainActivity">
+
+    <TextView
+
+        android:background="#f5d398"
+
+        android:text="Nhiệt dộ:"
+        android:textColor="#852d96"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="left"
+
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="60%"
+        app:layout_marginTopPercent='33%'
+        />
+    <ImageView
+        android:src="@drawable/icon_temp"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="70%"
+        app:layout_marginTopPercent='33%'/>
+    <TextView
+        android:id="@+id/txtTemperate"
+
+        android:background="#f5d398"
+
+        android:text="°C"
+        android:textColor="#852d96"
+        android:textStyle="bold"
+        android:textSize="45dp"
+        android:gravity="center"
+
+        app:layout_heightPercent="25%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="60%"
+        app:layout_marginTopPercent='40%'
+        />
+
+    <TextView
+
+
+        android:background="#98f3f5"
+
+        android:text="Độ ẩm :"
+        android:textColor="#ff0000"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="left"
+
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="10%"
+        app:layout_marginTopPercent='33%'
+        />
+    <ImageView
+        android:src="@drawable/icon_humadity"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="15%"
+        app:layout_marginTopPercent='33%' />
+    <TextView
+        android:id="@+id/txtHumidity"
+
+        android:background="#98f3f5"
+
+        android:text="%%"
+        android:textColor="#ff0000"
+        android:textStyle="bold"
+        android:textSize="45dp"
+        android:gravity="center"
+
+        app:layout_heightPercent="25%"
+        app:layout_widthPercent="35%"
+        app:layout_marginStartPercent="10%"
+        app:layout_marginTopPercent='40%'
+        />
+    <Switch
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trạng thái đèn"
+        android:id="@+id/switch1"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:checked="false" /><!--Khong dung Swicth-->
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textButton"
+        android:layout_below="@+id/switch1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp" /><!--Khong xai nua-->
+    <ToggleButton
+        android:id="@+id/btnLED"
+
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%"
+        app:layout_marginStartPercent="38%"
+        app:layout_marginTopPercent='75%'
+
+        android:background="@drawable/toggle_selector"
+        android:checked="false"
+        android:text=""
+        android:textOff=""
+        android:textOn="" />
+
+    <ImageView
+        android:src="@drawable/hcmut_official_logo"
+        android:scaleType="fitCenter"
+
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="20%"
+        app:layout_marginStartPercent="80%"
+        app:layout_marginTopPercent='0%'
+        />
+    <TextView
+        android:text="Dương Gia An - MSSV : 1952153"
+        android:scaleType="fitCenter"
+        android:textStyle="bold"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="70%"
+        app:layout_marginStartPercent="2%"
+        app:layout_marginTopPercent='0%'
+        />
+    <TextView
+    android:text="IOT - CC02 "
+    android:textStyle="bold"
+    android:scaleType="fitCenter"
+    app:layout_heightPercent="5%"
+    app:layout_widthPercent="30%"
+    app:layout_marginStartPercent="2%"
+    app:layout_marginTopPercent='3%'
+    />
+    <TextView
+        android:text="IOT DASH BOARD "
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:scaleType="fitCenter"
+        android:textColor="#a80359"
+        app:layout_heightPercent="15%"
+        app:layout_widthPercent="100%"
+        app:layout_marginStartPercent="8%"
+        app:layout_marginTopPercent='19%'
+        />
+    <TextView
+        android:id="@+id/txtLED"
+        android:text="112"
+        android:textSize="40dp"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="25%"
+        app:layout_marginStartPercent="65%"
+        app:layout_marginTopPercent='75%'
+        />
+
+</android.support.percent.PercentRelativeLayout>
