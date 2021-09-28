@@ -121,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
           Log.d("mqtt","Received: "+message.toString());
           if(topic.contains("iot-humidity")){
               txtHumidity.setText(message.toString()+"%");
-              btnLED.setChecked(false);
+
           }
           if(topic.contains("iot-temp")){
               txtTemperate.setText(message.toString()+"°C");
-              btnLED.setChecked(true);
+
           }
           if(topic.contains("iot-led")){
               if(message.toString().equals("1")) btnLED.setChecked(true);
