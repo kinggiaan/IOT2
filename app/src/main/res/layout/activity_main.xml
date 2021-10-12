@@ -175,7 +175,19 @@
         android:text="Get location and update" />
 
     <TextView
-        android:id="@+id/location_result"
+        android:id="@+id/lat"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="60%"
+        app:layout_marginStartPercent="15%"
+        app:layout_marginTopPercent='40%'
+
+        android:textStyle="bold"
+        android:textColor="#333"
+        android:textSize="20dp"
+        android:text="Lat : NOT DIFINE"
+        />
+    <TextView
+        android:id="@+id/lon"
         app:layout_heightPercent="5%"
         app:layout_widthPercent="60%"
         app:layout_marginStartPercent="15%"
@@ -184,7 +196,7 @@
         android:textStyle="bold"
         android:textColor="#333"
         android:textSize="20dp"
-        android:text="Location : NOT DIFINE"
+        android:text="Lon : NOT DIFINE"
         />
 </android.support.percent.PercentRelativeLayout>
 

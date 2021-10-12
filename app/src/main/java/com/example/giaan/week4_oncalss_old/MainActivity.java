@@ -1,8 +1,19 @@
 package com.example.giaan.week4_oncalss_old;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -10,11 +21,19 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,34 +49,38 @@ public class MainActivity extends AppCompatActivity {
     TextView txtLED;
     ToggleButton btnLED;
 
-    ToggleButton btn_get_location;
-    TextView location_result;
+    Button btn_get_location;
+    TextView lat;
+    TextView lon;
+
+    private FusedLocationProviderClient fusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtHumidity =findViewById(R.id.txtHumidity);
+        txtHumidity = findViewById(R.id.txtHumidity);
         txtTemperate = findViewById(R.id.txtTemperate);
-        switch1 = (Switch)findViewById(R.id.switch1);
-        textButton = (TextView)findViewById(R.id.textButton);
-        txtLED=findViewById(R.id.txtLED);
+        switch1 = (Switch) findViewById(R.id.switch1);
+        textButton = (TextView) findViewById(R.id.textButton);
+        txtLED = findViewById(R.id.txtLED);
 
-        btnLED=findViewById(R.id.btnLED);
+        btnLED = findViewById(R.id.btnLED);
         txtTemperate.setText("80°C");
         txtHumidity.setText("45%");
         txtLED.setText("100");
         switch1.setChecked(true);
-        btnLED.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        btnLED.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b){
-                if(b){
-                    Log.d("mqtt","Button is ON");
-                    sendDataMQTT("kinggiaan/f/iot-lab.iot-led","1");
-                }else{
-                    Log.d("mqtt","Button is OFF");
-                    sendDataMQTT("kinggiaan/f/iot-lab.iot-led","0");
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    Log.d("mqtt", "Button is ON");
+                    sendDataMQTT("kinggiaan/f/iot-lab.iot-led", "1");
+                } else {
+                    Log.d("mqtt", "Button is OFF");
+                    sendDataMQTT("kinggiaan/f/iot-lab.iot-led", "0");
                 }
             }
 
@@ -66,11 +89,72 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        LOCATION
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        btn_get_location = findViewById(R.id.btn_get_location);
+        lat = findViewById(R.id.lat);
+        lon = findViewById(R.id.lon);
+
+        btn_get_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Check Permission
+                getLocation();
+                if (ActivityCompat.checkSelfPermission(MainActivity.this
+                        , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    //IF GRANTED -> GETLOCATION
+
+                } else {
+                    ActivityCompat.requestPermissions(MainActivity.this
+                            , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                }
+            }
+        });
+
 
         setupScheduler();
         startMQTT();
 
     }
+
+    @SuppressLint("MissingPermission")
+    private void getLocation() {
+
+
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+
+                //Inilize Location
+                Location location = task.getResult();
+
+                if (location != null) {
+                    lat.setText("Changing");
+                        lon.setText("Changing");
+                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                        //initial addresslist
+
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.d("Location","Problem");
+                    }
+                    //Set latitu on text
+                        lat.setText(((int) addresses.get(0).getLatitude()));
+                        //Set lontidtu on text
+                        lon.setText((int) addresses.get(0).getLongitude());
+
+
+
+                }
+            }
+        });
+    }
+
     int waiting_period=0;
     boolean sending_mess_aigain=false;
     private void setupScheduler(){
