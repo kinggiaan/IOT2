@@ -128,10 +128,16 @@ public class MainActivity extends AppCompatActivity {
 
           }
           if(topic.contains("iot-led")){
-              if(message.toString().equals("1")) btnLED.setChecked(true);
-              else btnLED.setChecked(false);
+              if(message.toString().equals("1")) {
+                  btnLED.setChecked(true);
+                  txtLED.setText("ON");
+              }
+              else {
+                  btnLED.setChecked(false);
+                  txtLED.setText("OFF");
+              }
              //if(message.toString()=="0") sendDataMQTT("kinggiaan/f/iot-lab.iot-led","0");;
-              txtLED.setText(message.toString());
+              //txtLED.setText(message.toString());
 
        }
       }

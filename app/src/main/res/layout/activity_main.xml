@@ -20,14 +20,14 @@
         app:layout_heightPercent="5%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="60%"
-        app:layout_marginTopPercent='33%'
+        app:layout_marginTopPercent='54%'
         />
     <ImageView
         android:src="@drawable/icon_temp"
         app:layout_heightPercent="5%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="70%"
-        app:layout_marginTopPercent='33%'/>
+        app:layout_marginTopPercent='54%'/>
     <TextView
         android:id="@+id/txtTemperate"
 
@@ -42,7 +42,7 @@
         app:layout_heightPercent="25%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="60%"
-        app:layout_marginTopPercent='40%'
+        app:layout_marginTopPercent='60%'
         />
 
     <TextView
@@ -59,14 +59,15 @@
         app:layout_heightPercent="5%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="10%"
-        app:layout_marginTopPercent='33%'
+        app:layout_marginTopPercent='54%'
+
         />
     <ImageView
         android:src="@drawable/icon_humadity"
         app:layout_heightPercent="5%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="15%"
-        app:layout_marginTopPercent='33%' />
+        app:layout_marginTopPercent='54%' />
     <TextView
         android:id="@+id/txtHumidity"
 
@@ -81,7 +82,7 @@
         app:layout_heightPercent="25%"
         app:layout_widthPercent="35%"
         app:layout_marginStartPercent="10%"
-        app:layout_marginTopPercent='40%'
+        app:layout_marginTopPercent='60%'
         />
     <Switch
         android:visibility="invisible"
@@ -109,7 +110,7 @@
         app:layout_heightPercent="10%"
         app:layout_widthPercent="25%"
         app:layout_marginStartPercent="38%"
-        app:layout_marginTopPercent='75%'
+        app:layout_marginTopPercent='90%'
 
         android:background="@drawable/toggle_selector"
         android:checked="false"
@@ -157,12 +158,12 @@
         />
     <TextView
         android:id="@+id/txtLED"
-        android:text="112"
+        android:text="ON"
         android:textSize="40dp"
         app:layout_heightPercent="10%"
         app:layout_widthPercent="25%"
         app:layout_marginStartPercent="65%"
-        app:layout_marginTopPercent='75%'
+        app:layout_marginTopPercent='90%'
         />
 
 </android.support.percent.PercentRelativeLayout>
