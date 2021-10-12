@@ -12,6 +12,7 @@ android {
     }
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -34,4 +35,14 @@ dependencies {
     //implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'com.android.support:percent:24.2.1'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    // location play services
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+    // dexter runtime permissions
+    implementation 'com.karumi:dexter:4.2.0'
+
+    // ButterKnife view binding
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
