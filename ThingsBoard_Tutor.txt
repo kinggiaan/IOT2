@@ -3,3 +3,5 @@ https://demo.thingsboard.io/devices
 Account by github .
 
 KEY : B2SPI3z5iYS2aQOiLZ0E
+
+https://demo.thingsboard.io/dashboards/a69e41b0-2afb-11ec-bb44-8f438210d8b7
