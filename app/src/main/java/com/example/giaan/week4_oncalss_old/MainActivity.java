@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     TextView textButton;
     TextView txtLED;
     ToggleButton btnLED;
+
+    ToggleButton btn_get_location;
+    TextView location_result;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
+//        LOCATION
 
         setupScheduler();
         startMQTT();

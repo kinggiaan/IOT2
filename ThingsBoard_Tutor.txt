@@ -1,0 +1,5 @@
+https://demo.thingsboard.io/devices
+
+Account by github .
+
+KEY : B2SPI3z5iYS2aQOiLZ0E
