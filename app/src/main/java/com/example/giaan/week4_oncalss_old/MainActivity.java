@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (location != null) {
                     lat.setText("Changing");
-                        lon.setText("Changing");
+                    lon.setText("Changing");
                         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                         //initial addresslist
 
@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         addresses = geocoder.getFromLocation(
                                 location.getLatitude(), location.getLongitude(), 1);
-<<<<<<< HEAD
                         //Set latitu on text
                         lat.setText(Html.fromHtml(
                                 "<b><Latitude :</b>"
@@ -152,8 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         lon.setText(Html.fromHtml(
                                 "<b><Longtitude :</b>"
                                         + addresses.get(0).getLongitude()));
-=======
->>>>>>> parent of d14e98f (RA LOCATION roi)
+
                     } catch (IOException e) {
                         e.printStackTrace();
                         Log.d("Location","Problem");
