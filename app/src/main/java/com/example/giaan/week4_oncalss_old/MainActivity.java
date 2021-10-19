@@ -1,6 +1,7 @@
 package com.example.giaan.week4_oncalss_old;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     //////GET weather by location
     private final String url = "https://api.openweathermap.org/data/2.5/weather";
     private final String appid = "e53301e27efa0b66d05045d91b2742d3";
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Check Permission
-                getLocation();
+
                 if (ActivityCompat.checkSelfPermission(MainActivity.this
                         , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     //IF GRANTED -> GETLOCATION
@@ -111,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(MainActivity.this
                             , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                 }
+                getLocation();
             }
         });
 
@@ -120,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
     private void getLocation() {
 
 
@@ -127,17 +130,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(@NonNull Task<Location> task) {
-                lat.setText("Changing");
-                lon.setText("Changing");
+
                 //Inilize Location
                 Location location = task.getResult();
 
                 if (location != null) {
-                    try {
+                    lat.setText("Changing");
+                    lon.setText("Changing");
                         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                         //initial addresslist
 
-                        List<Address> addresses = geocoder.getFromLocation(
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(
                                 location.getLatitude(), location.getLongitude(), 1);
                         //Set latitu on text
                         lat.setText(Html.fromHtml(
@@ -146,12 +151,25 @@ public class MainActivity extends AppCompatActivity {
                         //Set lontidtu on text
                         lon.setText(Html.fromHtml(
 
+
+                                
+
+
                                 "<b><Longtitude :</b>"
 
+                               
+
                                         + addresses.get(0).getLongitude()));
+
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.d("Location","Problem");
                     }
+                    //Set latitu on text
+                        lat.setText(((int) addresses.get(0).getLatitude()));
+                        //Set lontidtu on text
+                        lon.setText((int) addresses.get(0).getLongitude());
+
 
 
                 }
