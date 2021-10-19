@@ -151,8 +151,8 @@
         android:textSize="40dp"
         android:scaleType="fitCenter"
         android:textColor="#a80359"
-        app:layout_heightPercent="15%"
-        app:layout_widthPercent="100%"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="85%"
         app:layout_marginStartPercent="8%"
         app:layout_marginTopPercent='19%'
         />
@@ -177,11 +177,11 @@
     <TextView
         android:id="@+id/lat"
         app:layout_heightPercent="5%"
-        app:layout_widthPercent="60%"
-        app:layout_marginStartPercent="15%"
-        app:layout_marginTopPercent='40%'
+        app:layout_widthPercent="45%"
+        app:layout_marginStartPercent="5%"
+        app:layout_marginTopPercent='30%'
 
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         android:textColor="#333"
         android:textSize="20dp"
         android:text="Lat : NOT DIFINE"
@@ -190,13 +190,28 @@
         android:id="@+id/lon"
         app:layout_heightPercent="5%"
         app:layout_widthPercent="60%"
+        app:layout_marginStartPercent="50%"
+        app:layout_marginTopPercent='30%'
+
+        android:textStyle="bold|italic"
+        android:textColor="#333"
+        android:textSize="20dp"
+        android:text="Lon : NOT DIFINE"
+        />
+    <TextView
+        android:id="@+id/yourLocation"
+        app:layout_heightPercent="5%"
+        app:layout_widthPercent="75%"
         app:layout_marginStartPercent="15%"
-        app:layout_marginTopPercent='35%'
+        app:layout_marginTopPercent='38%'
+
+
+        android:fontWeight="400"
 
         android:textStyle="bold"
         android:textColor="#333"
         android:textSize="20dp"
-        android:text="Lon : NOT DIFINE"
+        android:text="Your Location: NOT DIFINE"
         />
 </android.support.percent.PercentRelativeLayout>
 

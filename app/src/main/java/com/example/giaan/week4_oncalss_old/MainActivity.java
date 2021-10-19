@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     //////GET weather by location
     private final String url = "https://api.openweathermap.org/data/2.5/weather";
     private final String appid = "e53301e27efa0b66d05045d91b2742d3";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                         + addresses.get(0).getLatitude()));
                         //Set lontidtu on text
                         lon.setText(Html.fromHtml(
-                                "<b><Latitude:</b>"
+                                "<b><Longtitude:</b>"
                                         + addresses.get(0).getLongitude()));
                     } catch (IOException e) {
                         e.printStackTrace();
