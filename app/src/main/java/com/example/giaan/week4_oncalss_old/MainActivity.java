@@ -145,7 +145,9 @@ public class MainActivity extends AppCompatActivity {
                                         + addresses.get(0).getLatitude()));
                         //Set lontidtu on text
                         lon.setText(Html.fromHtml(
+
                                 "<b><Longtitude:</b>"
+
                                         + addresses.get(0).getLongitude()));
                     } catch (IOException e) {
                         e.printStackTrace();
