@@ -1,6 +1,7 @@
 package com.example.giaan.week4_oncalss_old;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
     private void getLocation() {
 
 
@@ -127,18 +129,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(@NonNull Task<Location> task) {
-                lat.setText("Changing");
-                lon.setText("Changing");
+
                 //Inilize Location
                 Location location = task.getResult();
 
                 if (location != null) {
-                    try {
+                    lat.setText("Changing");
+                        lon.setText("Changing");
                         Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
                         //initial addresslist
 
-                        List<Address> addresses = geocoder.getFromLocation(
+                    List<Address> addresses = null;
+                    try {
+                        addresses = geocoder.getFromLocation(
                                 location.getLatitude(), location.getLongitude(), 1);
+<<<<<<< HEAD
                         //Set latitu on text
                         lat.setText(Html.fromHtml(
                                 "<b><Latitude :</b>"
@@ -147,9 +152,17 @@ public class MainActivity extends AppCompatActivity {
                         lon.setText(Html.fromHtml(
                                 "<b><Longtitude :</b>"
                                         + addresses.get(0).getLongitude()));
+=======
+>>>>>>> parent of d14e98f (RA LOCATION roi)
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Log.d("Location","Problem");
                     }
+                    //Set latitu on text
+                        lat.setText(((int) addresses.get(0).getLatitude()));
+                        //Set lontidtu on text
+                        lon.setText((int) addresses.get(0).getLongitude());
+
 
 
                 }
