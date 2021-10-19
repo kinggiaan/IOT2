@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Check Permission
-                getLocation();
+
                 if (ActivityCompat.checkSelfPermission(MainActivity.this
                         , Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     //IF GRANTED -> GETLOCATION
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     ActivityCompat.requestPermissions(MainActivity.this
                             , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
                 }
+                getLocation();
             }
         });
 
