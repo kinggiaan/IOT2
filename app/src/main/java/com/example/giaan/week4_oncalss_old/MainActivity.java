@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity {
                                 location.getLatitude(), location.getLongitude(), 1);
                         //Set latitu on text
                         lat.setText(Html.fromHtml(
-                                "<b><Latitude :</b>"
+                                "Latitude :"
                                         + addresses.get(0).getLatitude()));
                         //Set lontidtu on text
                         lon.setText(Html.fromHtml(
 
-                                "<b><Longtitude :</b>"
+                                "Longtitude :"
 
                                         + addresses.get(0).getLongitude()));
                     } catch (IOException e) {
