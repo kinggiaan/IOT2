@@ -2,6 +2,7 @@ package com.example.giaan.week4_oncalss_old;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,8 +19,15 @@ import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +36,9 @@ import com.google.android.gms.tasks.Task;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -51,12 +62,13 @@ public class MainActivity extends AppCompatActivity {
     Button btn_get_location;
     TextView lat;
     TextView lon;
-
+    TextView yourLocation;
     private FusedLocationProviderClient fusedLocationClient;
 
     //////GET weather by location
-    private final String url = "https://api.openweathermap.org/data/2.5/weather";
+    private final String url = "http://api.openweathermap.org/data/2.5/weather";
     private final String appid = "e53301e27efa0b66d05045d91b2742d3";
+    String latString,lonString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         btn_get_location = findViewById(R.id.btn_get_location);
         lat = findViewById(R.id.lat);
         lon = findViewById(R.id.lon);
-
+        yourLocation = findViewById(R.id.yourLocation);
         btn_get_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,51 +126,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Weather Detail
+
+
 
         setupScheduler();
         startMQTT();
 
     }
 
-    private void getLocation() {
 
-
-        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                lat.setText("Changing");
-                lon.setText("Changing");
-                //Inilize Location
-                Location location = task.getResult();
-
-                if (location != null) {
-                    try {
-                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
-                        //initial addresslist
-
-                        List<Address> addresses = geocoder.getFromLocation(
-                                location.getLatitude(), location.getLongitude(), 1);
-                        //Set latitu on text
-                        lat.setText(Html.fromHtml(
-                                "Latitude :"
-                                        + addresses.get(0).getLatitude()));
-                        //Set lontidtu on text
-                        lon.setText(Html.fromHtml(
-
-                                "Longtitude :"
-
-                                        + addresses.get(0).getLongitude()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }
-            }
-        });
-
-    }
 
     int waiting_period=0;
     boolean sending_mess_aigain=false;
@@ -246,5 +223,117 @@ public class MainActivity extends AppCompatActivity {
 
   });
 
+    }
+    /////// Location
+    private void getLocation() {
+
+
+        fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                lat.setText("Changing");
+                lon.setText("Changing");
+                //Inilize Location
+                Location location = task.getResult();
+
+                if (location != null) {
+                    try {
+                        Geocoder geocoder = new Geocoder(MainActivity.this, Locale.getDefault());
+                        //initial addresslist
+
+                        List<Address> addresses = geocoder.getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1);
+                        //Set latitu on text
+                        lat.setText(Html.fromHtml(
+                                "Latitude :"
+                                        + addresses.get(0).getLatitude()));
+                        //Set lontidtu on text
+                        lon.setText(Html.fromHtml(
+
+                                "Longtitude :"
+
+                                        + addresses.get(0).getLongitude()));
+                        latString =  String.valueOf(addresses.get(0).getLatitude()) ;
+                        lonString = String.valueOf(addresses.get(0).getLongitude()) ;
+                        Log.d("Result Location",latString);
+                        Log.d("Result Location",lonString);
+                        getWeatherDetails();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
+        });
+
+    }
+
+    ///// Get Weather Detail
+    public void getWeatherDetails( ) {
+        String tempUrl = "";
+        if(latString.equals("")&&lonString.equals("")){
+            yourLocation.setText("Your Location: NOT FOUND");
+        }else{
+            yourLocation.setText("Your Location: NOT FOUND");
+                tempUrl = url + "?lat=" + latString + "&lon=" + lonString + "&appid=" + appid;
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    String output = "";
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        JSONArray jsonArray = jsonResponse.getJSONArray("weather");
+                        JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
+                        String description = jsonObjectWeather.getString("description");
+                        JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
+                        double temp = jsonObjectMain.getDouble("temp") - 273.15;
+                        double feelsLike = jsonObjectMain.getDouble("feels_like") - 273.15;
+                        float pressure = jsonObjectMain.getInt("pressure");
+                        int humidity = jsonObjectMain.getInt("humidity");
+                        JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
+                        String wind = jsonObjectWind.getString("speed");
+                        JSONObject jsonObjectClouds = jsonResponse.getJSONObject("clouds");
+                        String clouds = jsonObjectClouds.getString("all");
+                        JSONObject jsonObjectSys = jsonResponse.getJSONObject("sys");
+                        String countryName = jsonObjectSys.getString("country");
+                        String cityName = jsonResponse.getString("name");
+                        yourLocation.setTextColor(Color.rgb(68,134,199));
+
+                        String tempS= String.valueOf(temp);
+                        if(tempS.length()>4){
+                            tempS=tempS.substring(0,4);
+                        }
+                        output += "Current weather of " + cityName + " (" + countryName + ")"
+                                + "\n Temp: "+ tempS + "°C"
+                                + "\n Humidity: " + humidity + "%"
+                                + "\n Description: " + description
+                                + "\n Wind Speed: " + wind + "m/s (meters per second)"
+                                + "\n Cloudiness: " + clouds + "%"
+                                + "\n Pressure: " + pressure + " hPa";
+                        yourLocation.setText(output);
+
+
+
+                        //// SEND DATA to Adafruit here
+                        sendDataMQTT("kinggiaan/feeds/iot-lab.iot-humidity",String.valueOf(humidity));
+                        sendDataMQTT("kinggiaan/feeds/iot-lab.iot-temp",tempS );
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener(){
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
     }
 }

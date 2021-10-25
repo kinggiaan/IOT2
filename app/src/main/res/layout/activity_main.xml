@@ -25,8 +25,8 @@
     <ImageView
         android:src="@drawable/icon_temp"
         app:layout_heightPercent="5%"
-        app:layout_widthPercent="35%"
-        app:layout_marginStartPercent="70%"
+        app:layout_widthPercent="5%"
+        app:layout_marginStartPercent="80%"
         app:layout_marginTopPercent='54%'/>
     <TextView
         android:id="@+id/txtTemperate"
@@ -65,8 +65,8 @@
     <ImageView
         android:src="@drawable/icon_humadity"
         app:layout_heightPercent="5%"
-        app:layout_widthPercent="35%"
-        app:layout_marginStartPercent="15%"
+        app:layout_widthPercent="5%"
+        app:layout_marginStartPercent="30%"
         app:layout_marginTopPercent='54%' />
     <TextView
         android:id="@+id/txtHumidity"
@@ -169,9 +169,9 @@
     <Button
         android:id="@+id/btn_get_location"
         app:layout_heightPercent="7%"
-        app:layout_widthPercent="60%"
-        app:layout_marginStartPercent="25%"
-        app:layout_marginTopPercent='45%'
+        app:layout_widthPercent="70%"
+        app:layout_marginStartPercent="15%"
+        app:layout_marginTopPercent='30%'
         android:text="Get location and update" />
 
     <TextView
@@ -203,7 +203,7 @@
         app:layout_heightPercent="5%"
         app:layout_widthPercent="75%"
         app:layout_marginStartPercent="15%"
-        app:layout_marginTopPercent='33%'
+        app:layout_marginTopPercent='40%'
 
 
         android:fontWeight="400"
