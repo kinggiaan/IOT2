@@ -32,7 +32,7 @@ public class MQTTHelper {
 
 
     final String username = "kinggiaan";
-    final String password = "aio_YUXc86kBRtnPiSOcUEvO3SqWLmsJ";
+    final String password = "aio_uMtA80DWHDITO6FXqY8f7TvQPII4";
 
     public MqttAndroidClient mqttAndroidClient;
 

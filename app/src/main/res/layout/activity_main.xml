@@ -119,14 +119,15 @@
         android:textOn="" />
 
     <ImageView
-        android:src="@drawable/hcmut_official_logo"
-        android:scaleType="fitCenter"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
 
+        android:scaleType="fitCenter"
+        android:src="@drawable/hcmut_official_logo"
         app:layout_heightPercent="15%"
-        app:layout_widthPercent="20%"
         app:layout_marginStartPercent="80%"
         app:layout_marginTopPercent='0%'
-        />
+        app:layout_widthPercent="15%" />
     <TextView
         android:text="Dương Gia An - MSSV : 1952153"
         android:scaleType="fitCenter"
@@ -148,18 +149,18 @@
     <TextView
         android:text="IOT DASH BOARD "
         android:textStyle="bold"
-        android:textSize="35dp"
+        android:textSize="38dp"
         android:scaleType="fitCenter"
         android:textColor="#a80359"
-        app:layout_heightPercent="7%"
-        app:layout_widthPercent="75%"
+        app:layout_heightPercent="10%"
+        app:layout_widthPercent="80%"
         app:layout_marginStartPercent="5%"
-        app:layout_marginTopPercent='10%'
+        app:layout_marginTopPercent='7%'
         />
     <TextView
         android:id="@+id/txtLED"
         android:text="State"
-        android:textSize="40dp"
+        android:textSize="30dp"
         app:layout_heightPercent="10%"
         app:layout_widthPercent="25%"
         app:layout_marginStartPercent="65%"
@@ -200,17 +201,17 @@
         />
     <TextView
         android:id="@+id/yourLocation"
-        app:layout_heightPercent="5%"
-        app:layout_widthPercent="75%"
-        app:layout_marginStartPercent="15%"
-        app:layout_marginTopPercent='40%'
+        app:layout_heightPercent="13%"
+        app:layout_widthPercent="90%"
+        app:layout_marginStartPercent="10%"
+        app:layout_marginTopPercent='37%'
 
 
         android:fontWeight="400"
 
         android:textStyle="bold"
         android:textColor="#333"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:text="Your Location: NOT DIFINE"
         />
 </android.support.percent.PercentRelativeLayout>

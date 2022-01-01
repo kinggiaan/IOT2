@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btnLED = findViewById(R.id.btnLED);
         txtTemperate.setText("80°C");
         txtHumidity.setText("45%");
-        txtLED.setText("100");
+        txtLED.setText("State");
         switch1.setChecked(true);
         btnLED.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -176,8 +176,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void startMQTT(){
-  mqttHelper=new MQTTHelper(getApplicationContext(),"");
-  mqttHelper.setCallback(new MqttCallbackExtended() {
+         mqttHelper=new MQTTHelper(getApplicationContext(),"");
+         mqttHelper.setCallback(new MqttCallbackExtended() {
       @Override
       public void connectComplete(boolean reconnect, String serverURI) {
           Log.d("mqtt","Connection is successful");
@@ -307,13 +307,12 @@ public class MainActivity extends AppCompatActivity {
                         if(tempS.length()>4){
                             tempS=tempS.substring(0,4);
                         }
+
                         output += "Current weather of " + cityName + " (" + countryName + ")"
-                                + "\n Temp: "+ tempS + "°C"
-                                + "\n Humidity: " + humidity + "%"
-                                + "\n Description: " + description
-                                + "\n Wind Speed: " + wind + "m/s (meters per second)"
-                                + "\n Cloudiness: " + clouds + "%"
-                                + "\n Pressure: " + pressure + " hPa";
+                                + "\n ✪ Temp: "+ tempS + "°C"
+                                + "\n ✪ Humidity: " + humidity + "%"
+                                + "\n ✪ Wind Speed: " + wind + "m/s (meters per second)";
+
                         yourLocation.setText(output);
 
 
